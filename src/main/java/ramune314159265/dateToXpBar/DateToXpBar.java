@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public final class DateToXpBar extends JavaPlugin {
+	static public JavaPlugin main;
 	public ScheduledExecutorService scheduler;
 
 	static public void setXp(Player player) {
@@ -22,6 +23,7 @@ public final class DateToXpBar extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		DateToXpBar.main = this;
 		getServer().getPluginManager().registerEvents(new PluginListener(), this);
 
 		this.scheduler = Executors.newScheduledThreadPool(1);
