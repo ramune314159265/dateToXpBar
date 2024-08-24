@@ -1,5 +1,6 @@
 package ramune314159265.dateToXpBar;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,16 +24,17 @@ public final class DateToXpBar extends JavaPlugin {
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new PluginListener(), this);
 
-		LocalDateTime now = LocalDateTime.now();
-		LocalDateTime nextSecond = now.plusSeconds(1).withNano(0); // 次の秒の始まり
-		Duration duration = Duration.between(now, nextSecond);
-
 		this.scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.scheduleAtFixedRate(() -> {
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime nextSecond = now.plusSeconds(1).withNano(0);
+		Duration duration = Duration.between(now, nextSecond);
+		Bukkit.getLogger().info(String.valueOf(duration.toMillis()));
+
+		this.scheduler.scheduleAtFixedRate(() -> {
 			for (Player player : getServer().getOnlinePlayers()) {
 				setXp(player);
 			}
-		}, duration.toMillis(), 1, TimeUnit.SECONDS);
+		}, duration.toMillis(), 1000, TimeUnit.MILLISECONDS);
 	}
 
 	@Override
