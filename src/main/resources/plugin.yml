@@ -1,0 +1,6 @@
+name: dateToXpBar
+version: '1.0-SNAPSHOT'
+main: ramune314159265.dateToXpBar.DateToXpBar
+api-version: '1.20'
+authors: [ ramune314159265 ]
+description: Displays the date on the XP bar
